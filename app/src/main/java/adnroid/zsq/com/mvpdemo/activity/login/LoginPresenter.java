@@ -5,11 +5,12 @@ import android.widget.Toast;
 
 import adnroid.zsq.com.mvpdemo.base.presenter.BasePresenter;
 import adnroid.zsq.com.mvpdemo.base.view.IView;
+import adnroid.zsq.com.mvpdemo.http.rxsubscriber.ProgressSubscriber;
 
 /**
  * Created by Administrator on 2016/11/23 0023.
  */
-public class LoginPresenter  extends BasePresenter <ILoginView>{
+public class LoginPresenter   extends BasePresenter <ILoginView>{
 
     private   LoginModel loginModel;
     private ILoginView loginView;
@@ -32,16 +33,30 @@ public class LoginPresenter  extends BasePresenter <ILoginView>{
     public void startLogin(){
         String userName = loginView.getUserName();
         if (TextUtils.isEmpty(userName)){
-         loginView.setUserNameError("用户名不能为空");
+          loginView.setUserNameError("用户名不能为空");
             return;
         }
         String passWord = loginView.getPassWord();
         if (TextUtils.isEmpty(passWord)){
-            loginView.setPassWord("密码不能为空");
+            loginView.setPasswordError("密码不能为空");
             return;
         }
-        loginView.showProgressDialog();
-        loginModel.login(userName, passWord);
-        loginView.hideProgressDialog();
+
+        loginModel.login(userName, passWord).subscribe(new ProgressSubscriber<Object>(getView()) {
+            @Override
+            public void _onError(String message) {
+
+            }
+
+            @Override
+            public void _onNext(Object o) {
+
+            }
+
+            @Override
+            public void _onCompleted() {
+
+            }
+        });
     }
 }

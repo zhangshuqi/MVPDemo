@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatButton;
+import android.view.View;
 
 import adnroid.zsq.com.mvpdemo.R;
 import adnroid.zsq.com.mvpdemo.base.activity.BaseActivity;
@@ -52,11 +53,17 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     @Override
     protected void initEvent(Bundle savedInstanceState) {
         super.initEvent(savedInstanceState);
+        btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginPresenter.startLogin();
+            }
+        });
     }
 
     @Override
     public void setUserName(String userName) {
-
+        etUsername.setText(userName);
     }
 
     @Override
@@ -66,12 +73,12 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     @Override
     public void setPassWord(String passWord) {
-
+        etPassword.setText(passWord);
     }
 
     @Override
     public String getPassWord() {
-        return "";
+        return etPassword.getText().toString().trim();
     }
 
     @Override
@@ -86,14 +93,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     @Override
     public void setUserNameError(String error) {
-        tiUsername.setCounterEnabled(true);
+        tiUsername.setErrorEnabled(true);
         tiUsername.setError(error);
+
     }
 
     @Override
     public void setPasswordError(String error) {
-        tiPassword.setCounterEnabled(true);
+        tiPassword.setErrorEnabled(true);
         tiPassword.setError(error);
+
     }
 
     @Override
@@ -101,5 +110,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         super.onDestroy();
         loginPresenter.detachView();
     }
+
 
 }
