@@ -9,6 +9,7 @@ import android.view.View;
 
 import adnroid.zsq.com.mvpdemo.R;
 import adnroid.zsq.com.mvpdemo.base.activity.BaseActivity;
+import adnroid.zsq.com.mvpdemo.inject.component.ActivityComponent;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -36,12 +37,16 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
     }
 
     @Override
+    protected void setActivityComponent(ActivityComponent activityComponent) {
+        activityComponent.inject(this);
+    }
+
+    @Override
     protected void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         loginDialog = new ProgressDialog(this);
         loginDialog.setMessage("登陆中,请稍后");
         loginPresenter = new LoginPresenter();
-        loginPresenter.attachView(this);
     }
 
     @Override
@@ -105,11 +110,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
 
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        loginPresenter.detachView();
-    }
 
 
 }

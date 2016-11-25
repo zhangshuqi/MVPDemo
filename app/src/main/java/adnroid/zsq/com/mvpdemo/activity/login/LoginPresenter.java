@@ -3,6 +3,8 @@ package adnroid.zsq.com.mvpdemo.activity.login;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import adnroid.zsq.com.mvpdemo.base.presenter.BasePresenter;
 import adnroid.zsq.com.mvpdemo.base.view.IView;
 import adnroid.zsq.com.mvpdemo.http.rxsubscriber.ProgressSubscriber;
@@ -14,7 +16,7 @@ public class LoginPresenter   extends BasePresenter <ILoginView>{
 
     private   LoginModel loginModel;
     private ILoginView loginView;
-
+    @Inject
     public LoginPresenter() {
         loginModel = new LoginModel();
     }
