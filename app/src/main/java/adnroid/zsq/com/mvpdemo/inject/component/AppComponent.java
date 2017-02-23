@@ -11,12 +11,14 @@ import dagger.Component;
 @Component(modules = AppModule.class)
 public interface AppComponent {
 
-    class Instance{
-    private  static     AppComponent mComponent;
-        public  static void init(@NonNull AppComponent appComponent){
-             mComponent=appComponent;
+    class Instance {
+        private static AppComponent mComponent;
+
+        public static void init(@NonNull AppComponent appComponent) {
+            mComponent = appComponent;
         }
-        public  static  AppComponent getAppComponent(){
+
+        public static AppComponent getAppComponent() {
             return mComponent;
         }
     }

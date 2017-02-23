@@ -46,7 +46,8 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements ILogi
         super.initView(savedInstanceState);
         loginDialog = new ProgressDialog(this);
         loginDialog.setMessage("登陆中,请稍后");
-        loginPresenter = new LoginPresenter();
+      //  loginPresenter = new LoginPresenter();
+        loginPresenter=presenter;
     }
 
     @Override
